@@ -1,0 +1,193 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+    --wrapper-content-inline-size: 50vi;
+    --wrapper-inline-offset: 1.875rem;
+    --wrapper-inline-size: min(var(--wrapper-content-inline-size), 100% - var(--wrapper-inline-offset));
+  }
+  [data-theme='dark'] {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .container {
+    margin-inline: auto;
+		container-type: inline-size;
+		inline-size: var(--wrapper-inline-size);
+  }
+}
+
+@layer components {
+  .theme-toggle {
+    --link: 55.66% 0.208 268.35;
+    --fill: 42.76% 0.015 248.17;
+    --icon-fill: 41.57% 0.016 244.56;
+    --icon-fill-hover: 26.62% 0.009 248.18;
+    --size: 2rem;
+    --ease-1: cubic-bezier(.25, 0, .4, 1);
+    --ease-2: cubic-bezier(.25, 0, .3, 1);
+    --ease-elastic-1: cubic-bezier(.5, 1.25, .75, 1.25);
+    --ease-elastic-2: cubic-bezier(.5, 1.5, .75, 1.25);
+    --ease-out-1: cubic-bezier(0, 0, .1, 1);
+    --ease-out-2: cubic-bezier(0, 0, 0, 1);
+    --shadow-size: 0;
+    --padding: .5rem;
+    background: none;
+    border: none;
+    padding: 0;
+    block-size: var(--size);
+    inline-size: var(--size);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    outline-offset: .3125rem;
+    fill: oklch(var(--fill));
+    box-shadow: 0 0 var(--shadow-size) oklch(var(--link));
+    padding: var(--padding);
+    transition: outline-offset 145ms var(--ease-1), box-shadow .5s var(--ease-out-1);
+    svg {
+      inline-size: 100%;
+      block-size: 100%;
+      stroke-linecap: round;
+    }
+    [data-theme="dark"] & {
+      --link: 74.73% 0.12961380724033716 272.26608446912127;
+      --fill: 86.71% 0.011 247.95;
+      
+      --icon-fill: 76.26% 0.013 244.31;
+      --icon-fill-hover: 92.27% 0.006 239.82;
+    }
+    &__icon {
+      & > :is(.theme-toggle__icon-moon, .theme-toggle__icon-sun, .theme-toggle__icon-beams) {
+        transform-origin: center;
+      }
+
+      & > :is(.theme-toggle__icon-moon, .theme-toggle__icon-sun) {
+        fill: oklch(var(--icon-fill));
+
+        .theme-toggle:is(:hover, :focus-visible) > & {
+          fill: oklch(var(--icon-fill-hover));
+        }
+      }
+
+      & > .theme-toggle__icon-beams {
+        stroke: oklch(var(--icon-fill));
+        stroke-width: 2px;
+        .theme-toggle:is(:hover, :focus-visible) > & {
+          stroke: oklch(var(--icon-fill-hover));
+        }
+      }
+
+      [data-theme="dark"] & {
+        & > .theme-toggle__icon-sun {
+          transform: scale(1.75);
+        }
+        & > .theme-toggle__icon-beams {
+          opacity: 0;
+        }
+        & > .theme-toggle__icon-moon > circle {
+          transform: translateX(-7px);
+          @supports (cx: 1) {
+            cx: 17;
+            transform: translateX(0);
+          }
+        }
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        & > .theme-toggle__icon-sun {
+          transition: transform .5s var(--ease-elastic-1);
+          [data-theme="dark"] & {
+            transition-timing-function: var(--ease-2);
+            transition-duration: .25s;
+            transform: scale(1.75);
+          }
+        }
+        & > .theme-toggle__icon-beams {
+          transition: transform .5s var(--ease-elastic-2), opacity .5s var(--ease-2);
+          [data-theme="dark"] & {
+            transition-duration: .15s;
+            transform: rotateZ(-25deg);
+          }
+        }
+        & .theme-toggle__icon-moon > circle {
+          transition: transform .25s var(--ease-out-2);
+          @supports (cx: 1) {
+            transition: cx .25s var(--ease-out-2);
+          }
+          [data-theme="dark"] & {
+            transition-duration: .5s;
+            transition-delay: .25s;
+          }
+        }
+      }
+    }
+    &:hover:not(:active) {
+      --shadow-size: 5em;
+    }
+  }
+}
